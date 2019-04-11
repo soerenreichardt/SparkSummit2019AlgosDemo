@@ -2,7 +2,7 @@ package com.neo4j.algos.demos
 
 import com.neo4j.algos.GoTGraphApp
 
-object TriangleCountDemo extends GoTGraphApp(Some(1)) {
+object TriangleCountDemo extends GoTGraphApp {
 
   import spark.implicits._
 

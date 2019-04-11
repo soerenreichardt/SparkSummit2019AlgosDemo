@@ -5,7 +5,10 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.graphframes.GraphFrame
 
-abstract class GoTGraphApp(val bookNr: Option[Int] = None) extends App {
+abstract class GoTGraphApp extends App {
+
+  final val season: Option[Int] = Some(1)
+  final val medium: Medium = Series()
 
   implicit val spark: SparkSession = {
     val session = SparkSession
@@ -20,8 +23,8 @@ abstract class GoTGraphApp(val bookNr: Option[Int] = None) extends App {
 
   val g = createGoTGraphFrame(nodes, edges)
 
-  private val nodes = readNodeData(bookNr)
-  private val edges = readEdgeData(bookNr)
+  private def nodes = readNodeData(season, medium.path)
+  private def edges = readEdgeData(season, medium.path)
 
   private def createGoTGraphFrame(nodesDf: DataFrame, edgeDf: DataFrame): GraphFrame = {
     val preprocessedEdges = preprocessEdges(edgeDf)
@@ -39,5 +42,9 @@ abstract class GoTGraphApp(val bookNr: Option[Int] = None) extends App {
 
     edgeDf.union(reversedEdgesDf)
   }
+
+  trait Medium { def path: String }
+  case class Book() extends Medium { override val path = "book/asoiaf-book"}
+  case class Series() extends Medium { override val path = "series/got-s"}
 
 }

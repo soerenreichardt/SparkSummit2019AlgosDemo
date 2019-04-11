@@ -3,7 +3,7 @@ package com.neo4j.algos.demos
 import org.apache.spark.sql.functions._
 import com.neo4j.algos.GoTGraphApp
 
-object LabelPropagationDemo extends GoTGraphApp(Some(1)) {
+object LabelPropagationDemo extends GoTGraphApp {
 
   import spark.implicits._
 

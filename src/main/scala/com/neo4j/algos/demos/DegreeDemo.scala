@@ -2,7 +2,7 @@ package com.neo4j.algos.demos
 
 import com.neo4j.algos.GoTGraphApp
 
-object DegreeDemo extends GoTGraphApp(Some(1)) {
+object DegreeDemo extends GoTGraphApp {
 
   import spark.implicits._
 
