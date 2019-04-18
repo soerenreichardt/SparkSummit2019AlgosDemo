@@ -7,7 +7,7 @@ import org.graphframes.GraphFrame
 
 abstract class GoTGraphApp extends App {
 
-  final val season: Option[Int] = Some(1)
+  final val season: Option[Int] = Some(2)
   final val medium: Medium = Series()
 
   implicit val spark: SparkSession = {
