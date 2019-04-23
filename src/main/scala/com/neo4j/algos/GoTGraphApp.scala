@@ -7,6 +7,8 @@ import org.graphframes.GraphFrame
 
 abstract class GoTGraphApp extends App {
 
+  def both: Boolean = true
+
   final val season: Option[Int] = Some(2)
   final val medium: Medium = Series()
 
@@ -27,7 +29,11 @@ abstract class GoTGraphApp extends App {
   private def edges = readEdgeData(season, medium.path)
 
   private def createGoTGraphFrame(nodesDf: DataFrame, edgeDf: DataFrame): GraphFrame = {
-    val preprocessedEdges = preprocessEdges(edgeDf)
+    val preprocessedEdges = if (both) {
+      preprocessEdges(edgeDf)
+    } else {
+      edgeDf
+    }
 
     GraphFrame(nodesDf, preprocessedEdges)
   }
